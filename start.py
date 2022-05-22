@@ -19,7 +19,8 @@ print('----------------------------------')
 print('\n')
 print('available chooices:')
 print('[1] - Geleneksel Girişimci Eğitimi')
-print('[2] - İleri Girişimcilik Eğitimi // henüz geliştirilmekte')
+print('[2] - İleri Girişimcilik Eğitimi')
+print('[3] - Eğitim Kodu Gireceğim')
 print('[3] - Exit')
 
 while True:
@@ -29,4 +30,7 @@ while True:
     elif choice == '2':
         kosgeb(tc_kimlik_no, e_devlet_sifreniz, 2)
     elif choice == '3':
+        target = input('\n\nEğitim kodunu giriniz: ')
+        kosgeb(tc_kimlik_no, e_devlet_sifreniz, target)
+    elif choice == '4':
         sys.exit()

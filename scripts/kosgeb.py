@@ -21,10 +21,10 @@ warnings.filterwarnings("ignore")
 
 def kosgeb(username, password, target):
 
-    target = 'geleneksel'
+    token = ''
 
     driver = webdriver.Chrome()
-    driver.set_window_position(2000, 180)
+    #driver.set_window_position(2000, 180)
     driver.get('https://lms.kosgeb.gov.tr/login/login_page/index.html')
     # wait for the page to load
     time.sleep(5)
@@ -49,9 +49,14 @@ def kosgeb(username, password, target):
 
     if target == 'geleneksel':
         lesson_id = 964
+    elif target == 'ileri':
+        lesson_id = 965
+    else:
+        lesson_id = target
 
     #KURSU AÇAR
     while True:
+        exit_to_lesson = False
         # go to lesson page
         driver.get('https://lms.kosgeb.gov.tr/course/view.php?id=' + str(lesson_id))
         # wait for the page to load
@@ -134,48 +139,41 @@ def kosgeb(username, password, target):
                 driver.get(li_element_course_link)
                 # wait for the page to load
                 time.sleep(10)
-                continue
+                driver.get(li_list_url)
+                break
             elif li_element_course_type == 'modtype_page':
                 print('modtype_page')
                 driver.get(li_element_course_link)
                 # wait for the page to load
                 time.sleep(10)
-                continue
+                driver.get(li_list_url)
+                break
             elif li_element_course_type == 'modtype_quiz':
                 print('modtype_quiz')
                 driver.get(li_element_course_link)
                 # wait for the page to load
                 winsound.Beep(1000, 1000)
                 input('Quiz açıldı. Devam etmek için enter tuşuna basınız.')
-                continue
+                driver.get(li_list_url)
+                break
             elif li_element_course_type == 'modtype_hvp':
                 print('modtype_hvp')
                 driver.get(li_element_course_link)
                 # wait for the page to load
                 time.sleep(10)
-                #main_content = driver.find_element_by_id('main-content')
-                #page_content = main_content.find_element_by_id('page-content')
-                #h5p_iframe_wrapper = page_content.find_element_by_class_name('h5p-iframe-wrapper')
-                driver.switch_to.frame(driver.find_element_by_tag_name("iframe"))
-                h5p_video = driver.find_element_by_class_name('h5p-video')
-                h5p_total = h5p_video.find_element_by_class_name('h5p-total')
-                h5p_human_time = h5p_total.find_element_by_class_name('human-time').text
-                h5p_human_time_split = h5p_human_time.split(':')
-                h5p_human_time_split_minutes = h5p_human_time_split[0]
-                h5p_human_time_split_seconds = h5p_human_time_split[1]
-                calculated_time = int(h5p_human_time_split_minutes) * 60 + int(h5p_human_time_split_seconds) + 10
-                print('calculated_time: ' + str(calculated_time))
-                h5p_play = h5p_video.find_element_by_class_name('h5p-play')
-                h5p_play.click()
-                time.sleep(calculated_time)
-                h5p_sc_label = driver.find_element_by_class_name('h5p-sc-label')
-                h5p_sc_label.click()
-                time.sleep(10)
-                h5p_question_iv_continue = driver.find_element_by_class_name('h5p-question-iv-continue')
-                h5p_question_iv_continue.click()
+                if token == '':
+                    token = input('Token giriniz: ')
+                
+                lesson_id = li_element_course_link[-4:]
+                driver.get('https://lms.kosgeb.gov.tr/mod/hvp/ajax.php?contextId=' + str(lesson_id) + '&token=' + token + '&action=set_finished&score=1&maxScore=1')
+                # wait for the page to load
                 time.sleep(5)
-                h5p_joubelui_button = driver.find_element_by_class_name('h5p-joubelui-button')
-                h5p_joubelui_button.click()
-                time.sleep(5)
-                driver.switch_to.default_content()
-                continue
+                exit_to_lesson = True
+
+                break
+
+
+            if exit_to_lesson:
+                break
+
+
