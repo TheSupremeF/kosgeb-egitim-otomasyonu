@@ -11,7 +11,7 @@ This bot has been created for Moodle with H5PY Integration.</div>
   
 
 ### <div align="center">Prerequisites:
-1. To be registered for the course you want to apply for the bot.
+1. To be registered for the course you want the bot to apply .
 2. And await the tests after the sections.
 
 </div>  
