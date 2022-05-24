@@ -130,13 +130,9 @@ def kosgeb(username, password, target):
                                     break
                 if go_out:
                     break
+          
 
-
-        
-                    
-
-                            
-
+            # Checking the type of the course and doing the necessary actions.
 
             if li_element_course_type == 'modtype_resource':
                 print('modtype_resource')
@@ -172,6 +168,7 @@ def kosgeb(username, password, target):
                 exit_to_lesson = True
 
 
+            # Breaking the loop if the course is finished.
             if exit_to_lesson:
                 break
 

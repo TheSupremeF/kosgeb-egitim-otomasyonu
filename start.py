@@ -31,6 +31,22 @@ time.sleep(0.2)
 print('...')
 time.sleep(0.2)
 
+# Checking if the file chromedriver.exe exists in the current directory. If it does not exist, it will
+# print the message and exit the program.
+if not os.path.isfile('chromedriver.exe'):
+    print('chromedriver.exe bulunaamadı!')
+    print('lütfen chromedriver.exe dosyasını kurduğunuz dizine kopyalayınız.')
+    input('çıkmak için bir tuşa basınız.')
+    sys.exit()
+
+# Checking if the selenium module is installed. If it is not installed, it will print the message and
+# exit the program.
+try:
+    import selenium
+except ImportError:
+    print('selenium modülü yüklü değil!')
+    input('çıkmak için bir tuşa basınız.')
+    sys.exit()
 
 while True:
         print('T.C. Kimlik Numaranızı giriniz:')

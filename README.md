@@ -23,11 +23,12 @@ This bot has been created for Moodle with H5PY Integration.</div>
 2. Download the Selenium Web Driver via the link if you don't have Chrome installed:
 [Selenium Web Driver](https://www.selenium.dev/documentation/webdriver/getting_started/install_drivers/)
 3. Pull the project from GitHub, then extract it into a folder.
-4. Then inside the folder, open the command prompt and enter the command: 
+4. Put the chromedriver.exe file into the project folder.
+5. Then inside the folder, open the command prompt and enter the command: 
 ```py start.py```
-5. The program requires you to enter your Turkish ID Number and your E-Devlet password.
-6. The program requires you to define the course you want to skip with this bot.
-7. It will start Chrome and skip the courses without a single touch until tests.
+6. The program requires you to enter your Turkish ID Number and your E-Devlet password.
+7. The program requires you to define the course you want to skip with this bot.
+8. It will start Chrome and skip the courses without a single touch until tests.
 </div>  
   
 
