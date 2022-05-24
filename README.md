@@ -1,5 +1,6 @@
 ## <div align="center">KOSGEB Eğitim Otomasyonu</div>  
   
+<img src="images\preview.gif" title="Console window"/>
 
 <div align="center">We have created the bot to skip all the KOSGEB Remote Education System courses in this project. It takes tokens automatically in the specified course and applies them to skip to the following content. </div>  
   
