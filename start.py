@@ -14,9 +14,9 @@ print(' |  <| |  | |\___ \| | |_ |  __| |  _ < ')
 print(' | . \ |__| |____) | |__| | |____| |_) |')
 print(' |_|\_\____/|_____/ \_____|______|____/ ')
 print('           EĞİTİM OTOMASYONU            ')
-time.sleep(1)                                                                                
+time.sleep(1)
 print('----------------------------------')
-print('v2.0')
+print('v2.1')
 print('----------------------------------')
 print('developed by:')
 time.sleep(0.5)
@@ -30,28 +30,23 @@ print('..')
 time.sleep(0.2)
 print('...')
 time.sleep(0.2)
-print('T.C. Kimlik Numaranızı giriniz:')
-tc_kimlik_no = input()
+
+
 while True:
-    if len(tc_kimlik_no)<0:
-        print('Hatalı giriş,')
         print('T.C. Kimlik Numaranızı giriniz:')
         tc_kimlik_no = input()
-    else:
+        if len(tc_kimlik_no) != 11:
+            print('T.C. Kimlik numaranız 11 haneden kısa veya uzun olmamalıdır')
+
         print('E-Devlet Şifrenizi giriniz')
         e_devlet_sifreniz = input()
-
-
-
         print('----------------------------------')
         print('\n')
-        print('available chooices:')
+        print('available choices:')
         print('[1] - Geleneksel Girişimci Eğitimi')
         print('[2] - İleri Girişimcilik Eğitimi')
         print('[3] - Eğitim Kodu Gireceğim')
         print('[4] - Exit')
-
-
 
         while True:
             choice = input('\n\nSeçim: ')
@@ -64,3 +59,5 @@ while True:
                 kosgeb(tc_kimlik_no, e_devlet_sifreniz, target)
             elif choice == '4':
                 sys.exit()
+            else: False 
+            print('Hatalı giriş')

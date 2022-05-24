@@ -62,7 +62,7 @@ def kosgeb(username, password, target):
     while True:
         exit_to_lesson = False
         # go to lesson page
-        driver.get('https://lms.kosgeb.gov.tr/course/view.php?id=' + str(lesson_id))
+        driver.get(f'https://lms.kosgeb.gov.tr/course/view.php?id={lesson_id}')
         # wait for the page to load
         time.sleep(10)
         # find the ul list
@@ -166,13 +166,11 @@ def kosgeb(username, password, target):
                 # wait for the page to load
                 time.sleep(10)
                 link = driver.execute_script("return H5PIntegration['ajax']['setFinished']+'&score=1&maxScore=1';")
-                lesson_id = li_element_course_link[-4:]
                 driver.get(f'{link}')
                 # wait for the page to load
                 time.sleep(5)
                 exit_to_lesson = True
 
-                break
 
             if exit_to_lesson:
                 break
