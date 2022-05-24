@@ -1,7 +1,8 @@
-from ast import Break
-from gettext import find
 import json
 import os
+from ast import Break
+from gettext import find
+
 from multiprocessing.connection import wait
 from pickle import TRUE
 from re import T
@@ -10,19 +11,22 @@ from turtle import update
 from webbrowser import get
 
 from selenium import webdriver
+
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 import winsound
 
+
+
+
 import warnings
 warnings.filterwarnings("ignore")
 
+
 def kosgeb(username, password, target):
-
-    token = ''
-
+    
     driver = webdriver.Chrome()
     #driver.set_window_position(2000, 180)
     driver.get('https://lms.kosgeb.gov.tr/login/login_page/index.html')
@@ -45,12 +49,12 @@ def kosgeb(username, password, target):
     # click the login button
     login_button.click()
     # wait for the page to load
-    time.sleep(10)
+    time.sleep(15)
 
-    if target == 'geleneksel':
+    if target == 1:
         lesson_id = 964
-    elif target == 'ileri':
-        lesson_id = 965
+    elif target == 2:
+        lesson_id = 990
     else:
         lesson_id = target
 
@@ -161,17 +165,14 @@ def kosgeb(username, password, target):
                 driver.get(li_element_course_link)
                 # wait for the page to load
                 time.sleep(10)
-                if token == '':
-                    token = input('Token giriniz: ')
-                
+                link = driver.execute_script("return H5PIntegration['ajax']['setFinished']+'&score=1&maxScore=1';")
                 lesson_id = li_element_course_link[-4:]
-                driver.get('https://lms.kosgeb.gov.tr/mod/hvp/ajax.php?contextId=' + str(lesson_id) + '&token=' + token + '&action=set_finished&score=1&maxScore=1')
+                driver.get(f'{link}')
                 # wait for the page to load
                 time.sleep(5)
                 exit_to_lesson = True
 
                 break
-
 
             if exit_to_lesson:
                 break
