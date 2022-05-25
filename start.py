@@ -31,12 +31,91 @@ time.sleep(0.2)
 print('...')
 time.sleep(0.2)
 
-# Checking if the file chromedriver.exe exists in the current directory. If it does not exist, it will
-# print the message and exit the program.
-if not os.path.isfile('chromedriver.exe'):
-    print('chromedriver.exe bulunaamadı!')
-    print('lütfen chromedriver.exe dosyasını kurduğunuz dizine kopyalayınız.')
-    input('çıkmak için bir tuşa basınız.')
+# This is checking if the user is using a Linux, Windows, or Mac OS.
+if sys.platform == 'linux':
+    # check chrome is installed
+    if not os.path.isfile('/usr/bin/google-chrome'):
+        os.system('wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb')
+        #install deb
+        os.system('sudo dpkg -i google-chrome-stable_current_amd64.deb')
+        #remove deb
+        os.system('rm google-chrome-stable_current_amd64.deb')
+        #print success
+        print('chrome installed')
+
+    #check for chrome version
+    chrome_version = os.popen('google-chrome --version').read()
+
+    #check webdriver is installed
+    if not os.path.isfile('/usr/bin/chromedriver'):
+        #warn user to install and exit
+        print('chromedriver is not installed')
+        print('please install chromedriver and try again')
+        sys.exit()
+
+    #check for webdriver version
+    webdriver_version = os.popen('chromedriver --version').read()
+
+    #check webdriver version is compatible with chrome version
+    if not chrome_version[0:5] == webdriver_version[0:5]:
+        #warn user to install compatible version and exit
+        print('chromedriver is not compatible with chrome version')
+        print('please install chromedriver version compatible with chrome version')
+        sys.exit()
+elif sys.platform == 'win32':
+    #check chrome is installed
+    if not os.path.isfile('C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe'):
+        print('chrome is not installed')
+        print('please install chrome and try again')
+        sys.exit()
+
+    #check for chrome version
+    chrome_version = os.popen('chrome --version').read()
+
+    #check webdriver is installed
+    if not os.path.isfile('C:\\Program Files (x86)\\Google\\Chrome\\Application\\chromedriver.exe'):
+        #warn user to install and exit
+        print('chromedriver is not installed')
+        print('please install chromedriver and try again')
+        sys.exit()
+
+    #check for webdriver version
+    webdriver_version = os.popen('chromedriver --version').read()
+
+    #check webdriver version is compatible with chrome version
+    if not chrome_version[0:5] == webdriver_version[0:5]:
+        #warn user to install compatible version and exit
+        print('chromedriver is not compatible with chrome version')
+        print('please install chromedriver version compatible with chrome version')
+        sys.exit()
+elif sys.platform == 'darwin':
+    #check chrome is installed
+    if not os.path.isfile('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'):
+        print('chrome is not installed')
+        print('please install chrome and try again')
+        sys.exit()
+
+    #check for chrome version
+    chrome_version = os.popen('google-chrome --version').read()
+
+    #check webdriver is installed
+    if not os.path.isfile('/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'):
+        #warn user to install and exit
+        print('chromedriver is not installed')
+        print('please install chromedriver and try again')
+        sys.exit()
+
+    #check for webdriver version
+    webdriver_version = os.popen('chromedriver --version').read()
+
+    #check webdriver version is compatible with chrome version
+    if not chrome_version[0:5] == webdriver_version[0:5]:
+        #warn user to install compatible version and exit
+        print('chromedriver is not compatible with chrome version')
+        print('please install chromedriver version compatible with chrome version')
+        sys.exit()
+else:
+    print('this OS is not supported')
     sys.exit()
 
 # Checking if the selenium module is installed. If it is not installed, it will print the message and
@@ -44,8 +123,8 @@ if not os.path.isfile('chromedriver.exe'):
 try:
     import selenium
 except ImportError:
-    print('selenium modülü yüklü değil!')
-    input('çıkmak için bir tuşa basınız.')
+    print('selenium module is not installed')
+    print('please install selenium module and try again')
     sys.exit()
 
 while True:
